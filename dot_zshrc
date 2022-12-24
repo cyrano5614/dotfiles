@@ -1,0 +1,42 @@
+# zmodload zsh/zprof
+export GPG_TTY=$(tty)
+export PATH="$PATH:$HOME/.bin:$HOME/.local/bin"
+export EDITOR="nvim"
+export VISUAL="nvim"
+export VIRTUAL_ENV_DISABLE_PROMPT=true
+export PYDEVD_DISABLE_FILE_VALIDATION=1
+
+set -o ignoreeof
+
+# autoload -U compinit colors zcalc
+autoload -Uz compinit edit-command-line
+# for dump in ~/.zcompdump(N.mh+24); do
+#   compinit
+# done
+compinit -d
+
+zle -N edit-command-line
+bindkey "\e[1;2A" edit-command-line
+SPACESHIP_VI_MODE_SHOW=true
+SPACESHIP_VI_MODE_PREFIX=""
+SPACESHIP_VI_MODE_SUFFIX=$SPACESHIP_PROMPT_DEFAULT_SUFFIX
+SPACESHIP_VI_MODE_INSERT=[I]
+SPACESHIP_VI_MODE_NORMAL=[N]
+SPACESHIP_VI_MODE_COLOR="white"
+
+alias weechat='OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES weechat'
+
+source ~/.zsh/kubectl.alias
+
+eval "$(starship init zsh)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# PYTHON
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# NODE
+eval "$(fnm env --use-on-cd)"
+#
+# zprof
